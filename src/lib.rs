@@ -5,7 +5,7 @@
 //!
 //! ## Example
 //!
-//! ```rust
+//! ```rust,ignore
 //! #[macro_use]
 //! extern crate snack;
 //!
@@ -415,7 +415,7 @@ pub use self::character::*;
 pub use self::nom::*;
 
 
-pub use self::str::*;
+//pub use self::str::*;
 
 #[macro_use]
 mod util;
@@ -450,6 +450,6 @@ mod character;
 #[macro_use]
 mod nom;
 
-mod str;
+//mod str;
 
 pub mod types;

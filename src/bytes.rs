@@ -138,6 +138,7 @@ macro_rules! is_a (
   );
 );
 
+/*
 /// `escaped!(T -> IResult<T, T>, U, T -> IResult<T, T>) => T -> IResult<T, T> where T: InputIter,
 /// U: AsChar`
 /// matches a byte string with escaped characters.
@@ -400,6 +401,7 @@ macro_rules! escaped_transform (
     escaped_transform!(__impl_1 $i, call!($f), $control_char, $($rest)*)
   );
 );
+*/
 
 /// `take_while!(T -> bool) => &[T] -> IResult<&[T], &[T]>`
 /// returns the longest list of bytes until the provided function fails.
@@ -466,6 +468,7 @@ macro_rules! take_while1 (
   );
 );
 
+/*
 /// `take_while_m_n!(m: usize, n: usize, T -> bool) => &[T] -> IResult<&[T], &[T]>`
 /// returns a list of bytes or characters for which the provided function returns true.
 /// the returned list's size will be at least m, and at most n
@@ -606,7 +609,7 @@ macro_rules! take_till1 (
     take_till1!($input, call!($f));
   );
 );
-
+*/
 /// `take!(nb) => &[T] -> IResult<&[T], &[T]>`
 /// generates a parser consuming the specified number of bytes
 ///
@@ -669,7 +672,7 @@ macro_rules! take_str (
     }
   );
 );
-
+/*
 /// `take_until_and_consume!(tag) => &[T] -> IResult<&[T], &[T]>`
 /// generates a parser consuming bytes until the specified byte sequence is found, and consumes it
 ///
@@ -755,7 +758,7 @@ macro_rules! take_until_and_consume1 (
     }
   );
 );
-
+*/
 /// `take_until!(tag) => &[T] -> IResult<&[T], &[T]>`
 /// consumes data until it finds the specified tag.
 ///
@@ -843,6 +846,7 @@ macro_rules! take_until1 (
   );
 );
 
+/*
 /// `take_until_either_and_consume!(chars) => &[T] -> IResult<&[T], &[T]>`
 /// consumes data until it finds any of the specified characters, and consume it
 ///
@@ -1074,6 +1078,7 @@ macro_rules! length_bytes(
     length_data!($i, call!($f))
   )
 );
+o*/
 
 #[cfg(test)]
 mod tests {
@@ -1152,6 +1157,7 @@ mod tests {
     assert_eq!(a_or_b(e), Err(Err::Incomplete(Needed::Size(1))));
   }
 
+  /*
   #[cfg(feature = "alloc")]
   #[allow(unused_variables)]
   #[test]
@@ -1226,6 +1232,8 @@ mod tests {
       )))
     );
     assert_eq!(esc(CompleteStr("")), Ok((CompleteStr(""), CompleteStr(""))));
+    */
+
     /*assert_eq!(
       esc("AB\\A"),
       Err(Err::Error(error_node_position!(
@@ -1241,7 +1249,7 @@ mod tests {
     named!(esc3<&str, &str>, escaped!(call!(alpha), '\u{241b}', one_of!("\"n")));
     assert_eq!(esc3("ab␛ncd;"), Ok((";", "ab␛ncd")));
     */
-  }
+  //}
 
   #[cfg(feature = "alloc")]
   #[cfg(feature = "verbose-errors")]
@@ -1249,6 +1257,7 @@ mod tests {
     String::from_utf8_lossy(&i).into_owned()
   }
 
+  /*
   #[cfg(feature = "alloc")]
   #[cfg(feature = "verbose-errors")]
   #[test]
@@ -1318,6 +1327,7 @@ mod tests {
       Ok((&b";"[..], String::from("abèDàEF")))
     );
   }
+  */
 
   #[cfg(feature = "verbose-errors")]
   #[test]
@@ -1330,6 +1340,7 @@ mod tests {
     assert_eq!(r2, Ok((&b";"[..], &b"1"[..])));
   }
 
+  /*
   #[cfg(feature = "std")]
   #[test]
   fn escape_transform_str() {
@@ -1374,6 +1385,7 @@ mod tests {
         tag!("n") => { |_| "\n" })));
     assert_eq!(esc3("a␛0bc␛n"), Ok(("", String::from("a\0bc\n"))));
   }
+  */
 
   #[test]
   fn take_str_test() {
@@ -1383,6 +1395,7 @@ mod tests {
     assert_eq!(take_str!(&a[..], 9), Err(Err::Incomplete(Needed::Size(9))));
   }
 
+  /*
   #[test]
   fn take_until_and_consume() {
     named!(x, take_until_and_consume!("efgh"));
@@ -1565,6 +1578,7 @@ mod tests {
     named!(x, take_until_either_and_consume!("!."));
     assert_eq!(x(&b"123.abc"[..]), Ok((&b"abc"[..], &b"123"[..])));
   }
+  */
 
   #[test]
   fn take_until_incomplete() {
@@ -1683,6 +1697,7 @@ mod tests {
     );
   }
 
+  /*
   #[test]
   fn take_while_m_n() {
     use nom::is_alphabetic;
@@ -1738,6 +1753,7 @@ mod tests {
       Err(Err::Error(error_position!(f, ErrorKind::TakeWhileMN)))
     );
   }
+  */
 
   #[test]
   fn take_while1_complete() {
@@ -1767,6 +1783,7 @@ mod tests {
     );
   }
 
+  /*
   #[test]
   fn take_till() {
     use nom::is_alphabetic;
@@ -1820,6 +1837,7 @@ mod tests {
     assert_eq!(f(&c[..]), Ok((&b"abcd"[..], &b"123"[..])));
     assert_eq!(f(&d[..]), Err(Err::Incomplete(Needed::Size(1))));
   }
+  */
 
   #[test]
   fn take_while_utf8() {
@@ -1837,6 +1855,7 @@ mod tests {
     assert_eq!(g("點點點a"), Ok(("a", "點點點")));
   }
 
+  /*
   #[test]
   fn take_till_utf8() {
     named!(f<&str,&str>, take_till!(|c:char| { c == '點' }));
@@ -1877,6 +1896,7 @@ mod tests {
       )))
     );
   }
+  */
 
   #[test]
   fn take_utf8() {
@@ -1918,6 +1938,7 @@ mod tests {
     assert_eq!(y(&b"ab."[..]), Ok((&b"."[..], &b"ab"[..])));
   }
 
+  /*
   #[test]
   fn length_bytes() {
     use nom::le_u8;
@@ -1936,6 +1957,7 @@ mod tests {
     assert_eq!(y(b"magic\x02."), Err(Err::Incomplete(Needed::Size(2))));
     assert_eq!(y(b"magic\x02"), Err(Err::Incomplete(Needed::Size(2))));
   }
+  */
 
   #[cfg(feature = "alloc")]
   #[test]

@@ -66,8 +66,8 @@ name = "blockbuf-arithmetic"
 [[test]]
 name = "complete_float"
 
-[[test]]
-name = "css"
+#[[test]]
+#name = "css"
 
 [[test]]
 name = "custom_errors"
@@ -75,16 +75,16 @@ name = "custom_errors"
 [[test]]
 name = "float"
 
-[[test]]
-name = "inference"
+#[[test]]
+#name = "inference"
 
 [[test]]
 name = "ini"
 required-features = ["alloc"]
 
-[[test]]
-name = "ini_str"
-required-features = ["alloc"]
+#[[test]]
+#name = "ini_str"
+#required-features = ["alloc"]
 
 [[test]]
 name = "issues"
@@ -103,11 +103,11 @@ required-features = ["alloc"]
 #[[test]]
 #name = "named_args"
 
-[[test]]
-name = "overflow"
+#[[test]]
+#name = "overflow"
 
-[[test]]
-name = "reborrow_fold"
+#[[test]]
+#name = "reborrow_fold"
 
 [[test]]
 name = "test1"

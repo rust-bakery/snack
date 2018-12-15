@@ -359,6 +359,7 @@ macro_rules! alt_complete (
   );
 );
 
+/*
 /// `switch!(I -> IResult<I,P>, P => I -> IResult<I,O> | ... | P => I -> IResult<I,O> ) => I -> IResult<I, O>`
 /// choose the next parser depending on the result of the first one, if successful,
 /// and returns the result of the second parser
@@ -850,6 +851,7 @@ macro_rules! permutation_iterator (
     }
   });
 );
+*/
 
 #[cfg(test)]
 mod tests {
@@ -1025,6 +1027,7 @@ mod tests {
     assert_eq!(ac(a), Err(Err::Error(error_position!(a, ErrorKind::Alt))));
   }
 
+  /*
   #[allow(unused_variables)]
   #[test]
   fn switch() {
@@ -1083,6 +1086,7 @@ mod tests {
     let e = &b"efgabc"[..];
     assert_eq!(perm(e), Err(Err::Incomplete(Needed::Size(4))));
   }
+  */
 
   /*
   named!(does_not_compile,

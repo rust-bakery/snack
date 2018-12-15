@@ -369,6 +369,7 @@ macro_rules! many1(
   );
 );
 
+/*
 /// `many_till!(I -> IResult<I,O>, I -> IResult<I,P>) => I -> IResult<I, (Vec<O>, P)>`
 /// Applies the first parser until the second applies. Returns a tuple containing the list
 /// of results from the first in a Vec and the result of the second.
@@ -1034,6 +1035,7 @@ macro_rules! fold_many_m_n(
     fold_many_m_n!($i, $m, $n, call!($f), $init, $fold_f);
   );
 );
+*/
 
 #[cfg(test)]
 mod tests {
@@ -1277,6 +1279,7 @@ mod tests {
     assert_eq!(multi(d), Err(Err::Incomplete(Needed::Size(4))));
   }
 
+  /*
   #[test]
   #[cfg(feature = "alloc")]
   fn many_till() {
@@ -1298,7 +1301,7 @@ mod tests {
         error_position!(&c[..], ErrorKind::Tag)
       )))
     );
-  }
+  }*/
 
   #[test]
   #[cfg(feature = "std")]
@@ -1321,6 +1324,7 @@ mod tests {
     );
   }
 
+  /*
   #[test]
   #[cfg(feature = "alloc")]
   fn many_m_n() {
@@ -1677,5 +1681,6 @@ mod tests {
     assert_eq!(multi(d), Ok((&b"Abcdefgh"[..], res3)));
     assert_eq!(multi(e), Err(Err::Incomplete(Needed::Size(4))));
   }
+  */
 
 }
