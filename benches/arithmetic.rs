@@ -2,10 +2,10 @@
 extern crate test;
 
 #[macro_use]
-extern crate nom;
+extern crate snack;
 
 use test::Bencher;
-use nom::digit;
+use snack::digit;
 
 // Parser definition
 

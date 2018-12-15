@@ -2,10 +2,10 @@
 extern crate test;
 
 #[macro_use]
-extern crate nom;
+extern crate snack;
 
-use nom::IResult;
-use nom::types::CompleteStr;
+use snack::IResult;
+use snack::types::CompleteStr;
 
 use std::collections::HashMap;
 

@@ -2,9 +2,9 @@
 extern crate test;
 
 #[macro_use]
-extern crate nom;
+extern crate snack;
 
-use nom::{alphanumeric, multispace, space};
+use snack::{alphanumeric, multispace, space};
 
 use std::str;
 use std::collections::HashMap;
