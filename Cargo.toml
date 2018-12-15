@@ -50,8 +50,8 @@ default-features = false
 features = [ "alloc", "std", "regexp", "regexp_macros", "verbose-errors" ]
 all-features = true
 
-[[test]]
-name = "arithmetic"
+#[[test]]
+#name = "arithmetic"
 
 [[test]]
 name = "arithmetic_ast"
@@ -60,8 +60,8 @@ required-features = ["alloc"]
 [[test]]
 name = "blockbuf-arithmetic"
 
-[[test]]
-name = "complete_arithmetic"
+#[[test]]
+#name = "complete_arithmetic"
 
 [[test]]
 name = "complete_float"
@@ -90,8 +90,8 @@ required-features = ["alloc"]
 name = "issues"
 required-features = ["alloc", "regexp_macros"]
 
-[[test]]
-name = "json"
+#[[test]]
+#name = "json"
 
 [[test]]
 name = "mp4"
@@ -100,8 +100,8 @@ name = "mp4"
 name = "multiline"
 required-features = ["alloc"]
 
-[[test]]
-name = "named_args"
+#[[test]]
+#name = "named_args"
 
 [[test]]
 name = "overflow"

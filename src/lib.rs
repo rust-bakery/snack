@@ -405,20 +405,16 @@ pub use self::simple_errors::*;
 pub use self::branch::*;
 pub use self::internal::*;
 pub use self::macros::*;
-pub use self::methods::*;
 pub use self::multi::*;
 pub use self::sequence::*;
 
-pub use self::bits::*;
+//pub use self::bits::*;
 pub use self::bytes::*;
 
 pub use self::character::*;
 pub use self::nom::*;
 
-pub use self::whitespace::*;
 
-#[cfg(feature = "regexp")]
-pub use self::regexp::*;
 pub use self::str::*;
 
 #[macro_use]
@@ -443,25 +439,16 @@ mod branch;
 mod sequence;
 #[macro_use]
 mod multi;
-#[macro_use]
-pub mod methods;
 
 #[macro_use]
 mod bytes;
-#[macro_use]
-pub mod bits;
+//#[macro_use]
+//pub mod bits;
 
 #[macro_use]
 mod character;
 #[macro_use]
 mod nom;
-
-#[macro_use]
-pub mod whitespace;
-
-#[cfg(feature = "regexp")]
-#[macro_use]
-mod regexp;
 
 mod str;
 
