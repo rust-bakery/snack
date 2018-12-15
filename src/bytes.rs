@@ -9,7 +9,7 @@
 ///
 /// # Example
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!(x, tag!("abcd"));
 ///  let r = x(&b"abcdefgh"[..]);
@@ -49,7 +49,7 @@ macro_rules! tag (
 ///
 /// # Example
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!(test, tag_no_case!("ABcd"));
 ///
@@ -88,7 +88,7 @@ macro_rules! tag_no_case (
 ///
 /// # Example
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!( not_space, is_not!( " \t\r\n" ) );
 ///
@@ -114,7 +114,7 @@ macro_rules! is_not (
 ///
 /// # Example
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!(abcd, is_a!( "abcd" ));
 ///
@@ -148,8 +148,8 @@ macro_rules! is_a (
 ///
 /// # Example
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::alpha;
+/// # #[macro_use] extern crate snack;
+/// # use snack::alpha;
 /// # fn main() {
 ///  named!(esc, escaped!(call!(alpha), '\\', one_of!("\"n\\")));
 ///  assert_eq!(esc(&b"abcd;"[..]), Ok((&b";"[..], &b"abcd"[..])));
@@ -267,8 +267,8 @@ macro_rules! escaped (
 ///
 /// # Example
 /// ```ignore
-/// # #[macro_use] extern crate nom;
-/// # use nom::alpha;
+/// # #[macro_use] extern crate snack;
+/// # use snack::alpha;
 /// # use $crate::lib::std::str::from_utf8;
 /// # fn main() {
 /// fn to_s(i:Vec<u8>) -> String {
@@ -408,8 +408,8 @@ macro_rules! escaped_transform (
 ///
 /// # Example
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::is_alphanumeric;
+/// # #[macro_use] extern crate snack;
+/// # use snack::is_alphanumeric;
 /// # fn main() {
 ///  named!( alpha, take_while!( is_alphanumeric ) );
 ///
@@ -438,9 +438,9 @@ macro_rules! take_while (
 ///
 /// # Example
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::{Err,ErrorKind};
-/// # use nom::is_alphanumeric;
+/// # #[macro_use] extern crate snack;
+/// # use snack::{Err,ErrorKind};
+/// # use snack::is_alphanumeric;
 /// # fn main() {
 ///  named!( alpha, take_while1!( is_alphanumeric ) );
 ///
@@ -474,8 +474,8 @@ macro_rules! take_while1 (
 ///
 /// # Example
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::is_alphanumeric;
+/// # #[macro_use] extern crate snack;
+/// # use snack::is_alphanumeric;
 /// # fn main() {
 ///  named!( alpha, take_while!( is_alphanumeric ) );
 ///
@@ -550,7 +550,7 @@ macro_rules! take_while_m_n (
 ///
 /// # Example
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!( till_colon, take_till!(|ch| ch == b':') );
 ///
@@ -581,8 +581,8 @@ macro_rules! take_till (
 ///
 /// # Example
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::{Err,ErrorKind};
+/// # #[macro_use] extern crate snack;
+/// # use snack::{Err,ErrorKind};
 /// # fn main() {
 ///  named!( till1_colon, take_till1!(|ch| ch == b':') );
 ///
@@ -612,7 +612,7 @@ macro_rules! take_till1 (
 ///
 /// # Example
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  // Desmond parser
 ///  named!(take5, take!( 5 ) );
@@ -650,7 +650,7 @@ macro_rules! take (
 ///
 /// # Example
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!(take5( &[u8] ) -> &str, take_str!( 5 ) );
 ///
@@ -678,7 +678,7 @@ macro_rules! take_str (
 ///
 /// # Example
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!(x, take_until_and_consume!("foo"));
 ///  let r = x(&b"abcd foo efgh"[..]);
@@ -719,7 +719,7 @@ macro_rules! take_until_and_consume (
 ///
 /// # Example
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!(x, take_until_and_consume!("foo"));
 ///  let r = x(&b"abcd foo efgh"[..]);
@@ -764,7 +764,7 @@ macro_rules! take_until_and_consume1 (
 ///
 /// # Example
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!(x, take_until!("foo"));
 ///  let r = x(&b"abcd foo efgh"[..]);
@@ -805,7 +805,7 @@ macro_rules! take_until (
 ///
 /// # Example
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!(x, take_until1!("foo"));
 ///
@@ -851,7 +851,7 @@ macro_rules! take_until1 (
 ///
 /// # Example
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!(x, take_until_either_and_consume!("012"));
 ///  let r = x(&b"abcd2efgh"[..]);
@@ -910,7 +910,7 @@ macro_rules! take_until_either_and_consume (
 ///
 /// # Example
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!(x, take_until_either_and_consume!("012"));
 ///  let r = x(&b"abcd2efgh"[..]);
@@ -971,7 +971,7 @@ macro_rules! take_until_either_and_consume1 (
 ///
 /// # Example
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!(x, take_until_either!("012"));
 ///  let r = x(&b"abcd2efgh"[..]);
@@ -1014,7 +1014,7 @@ macro_rules! take_until_either (
 ///
 /// # Example
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!(x, take_until_either!("012"));
 ///  let r = x(&b"abcd2efgh"[..]);
@@ -1055,8 +1055,8 @@ macro_rules! take_until_either1 (
 ///
 /// # Example
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::be_u8;
+/// # #[macro_use] extern crate snack;
+/// # use snack::be_u8;
 /// # fn main() {
 ///  named!(with_length, length_bytes!( be_u8 ));
 ///  let r = with_length(&b"\x05abcdefgh"[..]);

@@ -105,12 +105,12 @@ impl<E: fmt::Debug> fmt::Display for Err<E> {
 /// translate parser result from IResult<I,O,u32> to IResult<I,O,E> with a custom type
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::IResult;
+/// # #[macro_use] extern crate snack;
+/// # use snack::IResult;
 /// # use std::convert::From;
-/// # use nom::Context;
-/// # use nom::Err;
-/// # use nom::ErrorKind;
+/// # use snack::Context;
+/// # use snack::Err;
+/// # use snack::ErrorKind;
 /// # fn main() {
 ///     // will add a Custom(42) error to the error chain
 ///     named!(err_test, add_return_error!(ErrorKind::Custom(42u32), tag!("abcd")));

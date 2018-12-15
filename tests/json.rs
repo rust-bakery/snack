@@ -2,9 +2,9 @@
 //#![feature(trace_macros)]
 
 #[macro_use]
-extern crate nom;
+extern crate snack;
 
-use nom::{is_alphanumeric, recognize_float};
+use snack::{is_alphanumeric, recognize_float};
 
 use std::str;
 use std::collections::HashMap;

@@ -1,5 +1,5 @@
 #[macro_use]
-extern crate nom;
+extern crate snack;
 
 #[derive(Debug, PartialEq)]
 pub struct Color {

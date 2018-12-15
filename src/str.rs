@@ -7,8 +7,8 @@
 /// consumes the recognized characters
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::IResult;
+/// # #[macro_use] extern crate snack;
+/// # use snack::IResult;
 /// # fn main() {
 ///  fn test(input: &str) -> IResult<&str, &str> {
 ///    tag_s!(input, "abcd")
@@ -33,9 +33,9 @@ macro_rules! tag_s (
 /// consumes the recognized characters
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::IResult;
-/// # use nom::InputLength;
+/// # #[macro_use] extern crate snack;
+/// # use snack::IResult;
+/// # use snack::InputLength;
 /// #[cfg(feature = "alloc")]
 /// # fn main() {
 ///  fn test(input: &str) -> IResult<&str, &str> {
@@ -61,7 +61,7 @@ macro_rules! tag_no_case_s (
 /// generates a parser consuming the specified number of characters
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  // Desmond parser
 ///  named!(take5<&str,&str>, take_s!( 5 ) );
@@ -91,7 +91,7 @@ macro_rules! take_s (
 /// returns the longest list of characters that do not appear in the provided array
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!( not_space<&str,&str>, is_not_s!( " \t\r\n" ) );
 ///
@@ -113,7 +113,7 @@ macro_rules! is_not_s (
 /// returns the longest list of characters that appear in the provided array
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!(abcd<&str, &str>, is_a_s!( "abcd" ));
 ///
@@ -140,7 +140,7 @@ macro_rules! is_a_s (
 /// The argument is either a function `char -> bool` or a macro returning a `bool
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  fn alphabetic(chr: char) -> bool { (chr >= 0x41 as char && chr <= 0x5A as char) || (chr >= 0x61 as char && chr <= 0x7A as char) }
 ///  named!( alpha<&str,&str>, take_while_s!( alphabetic ) );
@@ -168,8 +168,8 @@ macro_rules! take_while_s (
 /// The argument is either a function `char -> bool` or a macro returning a `bool`
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::is_alphanumeric;
+/// # #[macro_use] extern crate snack;
+/// # use snack::is_alphanumeric;
 /// # fn main() {
 ///  fn alphabetic(chr: char) -> bool { (chr >= 0x41 as char && chr <= 0x5A as char) || (chr >= 0x61 as char && chr <= 0x7A as char) }
 ///  named!( alpha<&str,&str>, take_while1_s!( alphabetic ) );

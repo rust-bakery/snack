@@ -7,9 +7,9 @@
 /// and take it into account if there is not enough data
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::ErrorKind;
-/// # use nom::be_u16;
+/// # #[macro_use] extern crate snack;
+/// # use snack::ErrorKind;
+/// # use snack::be_u16;
 /// // the return type depends of the children parsers
 /// named!(parser<&[u8], (u16, &[u8], &[u8]) >,
 ///   tuple!(
@@ -197,7 +197,7 @@ macro_rules! terminated(
 /// delimited(opening, X, closing) returns X
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// named!(bracketed,
 ///     delimited!(
 ///         tag!("("),
@@ -242,9 +242,9 @@ macro_rules! delimited(
 /// and take it into account if there is not enough data
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::{Err,Needed};
-/// use nom::be_u8;
+/// # #[macro_use] extern crate snack;
+/// # use snack::{Err,Needed};
+/// use snack::be_u8;
 ///
 /// // this parser implements a common pattern in binary formats,
 /// // the TAG-LENGTH-VALUE, where you first recognize a specific
@@ -286,8 +286,8 @@ macro_rules! delimited(
 /// `do_parse!(I->IResult<I,A> >> I->IResult<I,B> >> ... I->IResult<I,X> , ( O, P ) ) => I -> IResult<I, (O,P)>`
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// use nom::be_u8;
+/// # #[macro_use] extern crate snack;
+/// use snack::be_u8;
 /// named!(tag_length_value<(u8, &[u8])>,
 ///   do_parse!(
 ///     tag!( &[ 42u8 ][..] ) >>

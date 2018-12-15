@@ -14,7 +14,7 @@
 //! as follows:
 //!
 //! ```
-//! # #[macro_use] extern crate nom;
+//! # #[macro_use] extern crate snack;
 //! # fn main() {
 //! named!(tuple<&[u8], (&[u8], &[u8]) >,
 //!   ws!(tuple!( take!(3), tag!("de") ))
@@ -37,15 +37,15 @@
 //! spaces and tabs, you can do it like this:
 //!
 //! ```
-//! # #[macro_use] extern crate nom;
+//! # #[macro_use] extern crate snack;
 //! named!(pub space, eat_separator!(&b" \t"[..]));
 //!
 //! #[macro_export]
 //! macro_rules! sp (
 //!   ($i:expr, $($args:tt)*) => (
 //!     {
-//!       use nom::Convert;
-//!       use nom::Err;
+//!       use snack::Convert;
+//!       use snack::Err;
 //!
 //!       match sep!($i, space, $($args)*) {
 //!         Err(e) => Err(e),
@@ -706,7 +706,7 @@ macro_rules! separated_list_sep (
 /// helper macros to build a separator parser
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// named!(pub space, eat_separator!(&b" \t"[..]));
 /// # fn main() {}
 /// ```
@@ -858,7 +858,7 @@ where
 /// To use `ws!`, pass your parser as argument:
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 /// named!(tuple<&[u8], (&[u8], &[u8]) >,
 ///   ws!(tuple!( take!(3), tag!("de") ))

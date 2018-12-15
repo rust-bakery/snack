@@ -93,7 +93,7 @@ impl HexDisplay for str {
 /// and the parser's calling code
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///    named!(f, dbg!( tag!( "abcd" ) ) );
 ///
@@ -133,7 +133,7 @@ macro_rules! dbg (
 /// It also displays the input in hexdump format
 ///
 /// ```ignore
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///    named!(f, dbg_dmp!( tag!( "abcd" ) ) );
 ///

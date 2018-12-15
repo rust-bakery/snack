@@ -2,7 +2,7 @@
 #![allow(unused_variables)]
 
 #[macro_use]
-extern crate nom;
+extern crate snack;
 
 use std::str;
 

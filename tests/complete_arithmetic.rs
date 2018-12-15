@@ -1,19 +1,19 @@
 #[macro_use]
-extern crate nom;
+extern crate snack;
 
-use nom::types::CompleteStr;
+use snack::types::CompleteStr;
 
 use std::str::FromStr;
 
 #[macro_export]
 macro_rules! complete_named (
   ($name:ident, $submac:ident!( $($args:tt)* )) => (
-    fn $name( i: CompleteStr ) -> nom::IResult<CompleteStr, CompleteStr, u32> {
+    fn $name( i: CompleteStr ) -> snack::IResult<CompleteStr, CompleteStr, u32> {
       $submac!(i, $($args)*)
     }
   );
   ($name:ident<$o:ty>, $submac:ident!( $($args:tt)* )) => (
-    fn $name( i: CompleteStr ) -> nom::IResult<CompleteStr, $o, u32> {
+    fn $name( i: CompleteStr ) -> snack::IResult<CompleteStr, $o, u32> {
       $submac!(i, $($args)*)
     }
   );
@@ -76,7 +76,7 @@ fn factor_test() {
 
 #[test]
 fn parens_test() {
-  use nom::ErrorKind;
+  use snack::ErrorKind;
 
   let input1 = CompleteStr(" 2* (  3 + 4 ) ");
   assert_eq!(expr(input1), Ok((CompleteStr(""), 14)));
@@ -87,7 +87,7 @@ fn parens_test() {
   let input3 = CompleteStr("  2*2 / ( 5 - 1) +   ");
   assert_eq!(
     root_expr(input3),
-    Err(nom::Err::Error(error_position!(
+    Err(snack::Err::Error(error_position!(
       CompleteStr("+   "),
       ErrorKind::Eof
     )))

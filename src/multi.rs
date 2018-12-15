@@ -224,7 +224,7 @@ macro_rules! separated_nonempty_list_complete {
 /// (to avoid infinite loops).
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!(multi<&[u8], Vec<&[u8]> >, many0!( tag!( "abcd" ) ) );
 ///
@@ -292,10 +292,10 @@ macro_rules! many0(
 /// the embedded parser may return Incomplete
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::Err;
-/// # use nom::ErrorKind;
-/// # use nom::types::CompleteByteSlice;
+/// # #[macro_use] extern crate snack;
+/// # use snack::Err;
+/// # use snack::ErrorKind;
+/// # use snack::types::CompleteByteSlice;
 /// # fn main() {
 ///  named!(multi<&[u8], Vec<&[u8]> >, many1!( tag!( "abcd" ) ) );
 ///
@@ -376,9 +376,9 @@ macro_rules! many1(
 /// The first embedded parser may return Incomplete
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::Err;
-/// # use nom::ErrorKind;
+/// # #[macro_use] extern crate snack;
+/// # use snack::Err;
+/// # use snack::ErrorKind;
 /// # fn main() {
 ///    named!(multi<&[u8], (Vec<&[u8]>, &[u8]) >, many_till!( tag!( "abcd" ), tag!( "efgh" ) ) );
 ///
@@ -465,9 +465,9 @@ macro_rules! many_till(
 /// the embedded parser may return Incomplete
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::Err;
-/// # use nom::ErrorKind;
+/// # #[macro_use] extern crate snack;
+/// # use snack::Err;
+/// # use snack::ErrorKind;
 /// # fn main() {
 ///  named!(multi<&[u8], Vec<&[u8]> >, many_m_n!(2, 4, tag!( "abcd" ) ) );
 ///
@@ -557,9 +557,9 @@ macro_rules! many_m_n(
 /// Applies the child parser a specified number of times
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::Err;
-/// # use nom::ErrorKind;
+/// # #[macro_use] extern crate snack;
+/// # use snack::Err;
+/// # use snack::ErrorKind;
 /// # fn main() {
 ///  named!(counter< Vec<&[u8]> >, count!( tag!( "abcd" ), 2 ) );
 ///
@@ -624,9 +624,9 @@ macro_rules! count(
 /// The type must be specified and it must be `Copy`
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::Err;
-/// # use nom::ErrorKind;
+/// # #[macro_use] extern crate snack;
+/// # use snack::Err;
+/// # use snack::ErrorKind;
 /// # fn main() {
 ///  named!(counter< [&[u8]; 2] >, count_fixed!( &[u8], tag!( "abcd" ), 2 ) );
 ///  // can omit the type specifier if returning slices
@@ -795,7 +795,7 @@ macro_rules! length_value(
 /// the embedded parser may return Incomplete
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!(multi<&[u8], Vec<&[u8]> >,
 ///    fold_many0!( tag!( "abcd" ), Vec::new(), |mut acc: Vec<_>, item| {
@@ -865,9 +865,9 @@ macro_rules! fold_many0(
 /// the embedded parser may return Incomplete
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::Err;
-/// # use nom::ErrorKind;
+/// # #[macro_use] extern crate snack;
+/// # use snack::Err;
+/// # use snack::ErrorKind;
 /// # fn main() {
 ///  named!(multi<&[u8], Vec<&[u8]> >,
 ///    fold_many1!( tag!( "abcd" ), Vec::new(), |mut acc: Vec<_>, item| {
@@ -954,9 +954,9 @@ macro_rules! fold_many1(
 /// the embedded parser may return Incomplete
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::Err;
-/// # use nom::ErrorKind;
+/// # #[macro_use] extern crate snack;
+/// # use snack::Err;
+/// # use snack::ErrorKind;
 /// # fn main() {
 ///  named!(multi<&[u8], Vec<&[u8]> >,
 ///    fold_many_m_n!(2, 4, tag!( "abcd" ), Vec::new(), |mut acc: Vec<_>, item| {

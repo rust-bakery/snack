@@ -6,10 +6,10 @@
 #![allow(unused_imports)]
 
 #[macro_use]
-extern crate nom;
+extern crate snack;
 
 use std::str;
-use nom::{alpha, is_digit};
+use snack::{alpha, is_digit};
 
 // issue #617
 named!(multi<&[u8], () >, fold_many0!( take_while1!( is_digit ), (), |_, _| {}));

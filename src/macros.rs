@@ -386,8 +386,8 @@ macro_rules! named_attr (
 /// Used to wrap common expressions and function as macros
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::IResult;
+/// # #[macro_use] extern crate snack;
+/// # use snack::IResult;
 /// # fn main() {
 ///   fn take_wrapper(input: &[u8], i: u8) -> IResult<&[u8],&[u8]> { take!(input, i * 10) }
 ///
@@ -404,8 +404,8 @@ macro_rules! call (
 /// emulate function currying: `apply!(my_function, arg1, arg2, ...)` becomes `my_function(input, arg1, arg2, ...)`
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::IResult;
+/// # #[macro_use] extern crate snack;
+/// # use snack::IResult;
 /// # fn main() {
 ///   fn take_wrapper(input: &[u8], i: u8) -> IResult<&[u8],&[u8]> { take!(input, i * 10) }
 ///
@@ -435,9 +435,9 @@ macro_rules! apply (
 /// that can be matched to provide useful error messages.
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::Err;
-/// # use nom::ErrorKind;
+/// # #[macro_use] extern crate snack;
+/// # use snack::Err;
+/// # use snack::ErrorKind;
 /// # fn main() {
 ///     named!(err_test<&[u8],&[u8],u32>, alt!(
 ///       tag!("abcd") |
@@ -524,10 +524,10 @@ macro_rules! return_error (
 /// for an error
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # use std::collections;
-/// # use nom::Err;
-/// # use nom::ErrorKind;
+/// # use snack::Err;
+/// # use snack::ErrorKind;
 /// # fn main() {
 ///     named!(err_test, add_return_error!(ErrorKind::Custom(42u32), tag!("abcd")));
 ///
@@ -565,10 +565,10 @@ macro_rules! add_return_error (
 /// with an `Error`
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # use std::collections;
-/// # use nom::Err;
-/// # use nom::ErrorKind;
+/// # use snack::Err;
+/// # use snack::ErrorKind;
 /// # fn main() {
 ///     named!(take_5, complete!(take!(5)));
 ///
@@ -606,13 +606,13 @@ macro_rules! complete (
 /// this can provide more flexibility than `do_parse!` if needed
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::Err;
-/// # use nom::ErrorKind;
-/// # use nom::IResult;
+/// # #[macro_use] extern crate snack;
+/// # use snack::Err;
+/// # use snack::ErrorKind;
+/// # use snack::IResult;
 ///
 ///  fn take_add(input:&[u8], size: u8) -> IResult<&[u8],&[u8]> {
-///    let (i1, sz)     = try_parse!(input, nom::be_u8);
+///    let (i1, sz)     = try_parse!(input, snack::be_u8);
 ///    let (i2, length) = try_parse!(i1, expr_opt!(size.checked_add(sz)));
 ///    let (i3, data)   = try_parse!(i2, take!(length));
 ///    return Ok((i3, data));
@@ -814,9 +814,9 @@ macro_rules! parse_to (
 /// returns the result of the child parser if it satisfies a verification function
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
-///  named!(check<u32>, verify!(nom::be_u32, |val:u32| val >= 0 && val < 3));
+///  named!(check<u32>, verify!(snack::be_u32, |val:u32| val >= 0 && val < 3));
 /// # }
 /// ```
 #[macro_export]
@@ -860,7 +860,7 @@ macro_rules! verify (
 /// If no child parser is provided, always return the value
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!(x<u8>, value!(42, delimited!(tag!("<!--"), take!(5), tag!("-->"))));
 ///  named!(y<u8>, delimited!(tag!("<!--"), value!(42), tag!("-->")));
@@ -921,10 +921,10 @@ macro_rules! expr_res (
 /// Useful when doing computations in a chain
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::Err;
-/// # use nom::IResult;
-/// # use nom::{be_u8,ErrorKind};
+/// # #[macro_use] extern crate snack;
+/// # use snack::Err;
+/// # use snack::IResult;
+/// # use snack::{be_u8,ErrorKind};
 ///
 ///  fn take_add(input:&[u8], size: u8) -> IResult<&[u8],&[u8]> {
 ///    do_parse!(input,
@@ -975,7 +975,7 @@ macro_rules! expr_opt (
 /// since `complete!` transforms an `Incomplete` in an `Error`.
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!( o<&[u8], Option<&[u8]> >, opt!( tag!( "abcd" ) ) );
 ///
@@ -1006,18 +1006,18 @@ macro_rules! opt(
   );
 );
 
-/// `opt_res!(I -> IResult<I,O>) => I -> IResult<I, Result<nom::Err,O>>`
+/// `opt_res!(I -> IResult<I,O>) => I -> IResult<I, Result<snack::Err,O>>`
 /// make the underlying parser optional
 ///
 /// returns a Result, with Err containing the parsing error
 ///
 /// ```ignore
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # #[cfg(feature = "verbose-errors")]
-/// # use nom::Err::Position;
-/// # use nom::ErrorKind;
+/// # use snack::Err::Position;
+/// # use snack::ErrorKind;
 /// # fn main() {
-///  named!( o<&[u8], Result<&[u8], nom::Err<&[u8]> > >, opt_res!( tag!( "abcd" ) ) );
+///  named!( o<&[u8], Result<&[u8], snack::Err<&[u8]> > >, opt_res!( tag!( "abcd" ) ) );
 ///
 ///  let a = b"abcdef";
 ///  let b = b"bcdefg";
@@ -1059,8 +1059,8 @@ macro_rules! opt_res (
 /// a `do_parse!`.
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::IResult;
+/// # #[macro_use] extern crate snack;
+/// # use snack::IResult;
 /// # fn main() {
 ///  let b = true;
 ///  let f: Box<Fn(&'static [u8]) -> IResult<&[u8],Option<&[u8]>>> = Box::new(closure!(&'static[u8],
@@ -1113,8 +1113,8 @@ macro_rules! cond_with_error(
 /// a `do_parse!`.
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::IResult;
+/// # #[macro_use] extern crate snack;
+/// # use snack::IResult;
 /// # fn main() {
 ///  let b = true;
 ///  let f: Box<Fn(&'static [u8]) -> IResult<&[u8],Option<&[u8]>>> = Box::new(closure!(&'static[u8],
@@ -1171,8 +1171,8 @@ macro_rules! cond(
 /// a `do_parse!`.
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::{Err,ErrorKind,IResult};
+/// # #[macro_use] extern crate snack;
+/// # use snack::{Err,ErrorKind,IResult};
 /// # fn main() {
 ///  let b = true;
 ///  let f = closure!(&'static[u8],
@@ -1223,7 +1223,7 @@ macro_rules! cond_reduce(
 /// the embedded parser may return Err(Err::Incomplete
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!(ptag, peek!( tag!( "abcd" ) ) );
 ///
@@ -1255,9 +1255,9 @@ macro_rules! peek(
 /// does not consume the input
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::Err;
-/// # use nom::ErrorKind;
+/// # #[macro_use] extern crate snack;
+/// # use snack::Err;
+/// # use snack::ErrorKind;
 /// # fn main() {
 /// named!(not_e, do_parse!(
 ///     res: tag!("abc")      >>
@@ -1308,7 +1308,7 @@ macro_rules! not(
 /// allows access to the parser's result without affecting it
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # use std::str;
 /// # fn main() {
 ///  named!(ptag, tap!(res: tag!( "abcd" ) => { println!("recognized {}", str::from_utf8(res).unwrap()) } ) );
@@ -1388,7 +1388,7 @@ macro_rules! exact (
 /// if the child parser was successful, return the consumed input as produced value
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!(x, recognize!(delimited!(tag!("<!--"), take!(5), tag!("-->"))));
 ///  let r = x(&b"<!-- abc --> aaa"[..]);

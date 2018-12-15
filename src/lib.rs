@@ -7,7 +7,7 @@
 //!
 //! ```rust
 //! #[macro_use]
-//! extern crate nom;
+//! extern crate snack;
 //!
 //! #[derive(Debug,PartialEq)]
 //! pub struct Color {
@@ -89,7 +89,7 @@
 //!
 //! ```rust
 //! #[macro_use]
-//! extern crate nom;
+//! extern crate snack;
 //!
 //! # fn main() {
 //! named!(parens, delimited!(char!('('), is_not!(")"), char!(')')));
@@ -102,9 +102,9 @@
 //!
 //! ```rust
 //! #[macro_use]
-//! extern crate nom;
+//! extern crate snack;
 //!
-//! use nom::{IResult,Err,Needed};
+//! use snack::{IResult,Err,Needed};
 //!
 //! # fn main() {
 //! fn take4(i:&[u8]) -> IResult<&[u8], &[u8]>{
@@ -126,7 +126,7 @@
 //!
 //! ```rust
 //! #[macro_use]
-//! extern crate nom;
+//! extern crate snack;
 //!
 //! # fn main() {
 //! named!(take4, take!(4));
@@ -149,7 +149,7 @@
 //! `IResult` is an alias for the `Result` type:
 //!
 //! ```rust
-//! use nom::{Needed, Context};
+//! use snack::{Needed, Context};
 //!
 //! type IResult<I, O, E = u32> = Result<(I, O), Err<I, E>>;
 //!
@@ -175,7 +175,7 @@
 //! Macros are the main way to make new parsers by combining other ones. Those macros accept other macros or function names as arguments. You then need to make a function out of that combinator with **`named!`**, or a closure with **`closure!`**. Here is how you would do, with the **`tag!`** and **`take!`** combinators:
 //!
 //! ```rust
-//! # #[macro_use] extern crate nom;
+//! # #[macro_use] extern crate snack;
 //! # fn main() {
 //! named!(abcd_parser, tag!("abcd")); // will consume bytes if the input begins with "abcd"
 //!
@@ -196,7 +196,7 @@
 //! **IMPORTANT NOTE**: Rust's macros can be very sensitive to the syntax, so you may encounter an error compiling parsers like this one:
 //!
 //! ```rust
-//! # #[macro_use] extern crate nom;
+//! # #[macro_use] extern crate snack;
 //! # #[cfg(feature = "alloc")]
 //! # fn main() {
 //! named!(my_function<&[u8], Vec<&[u8]>>, many0!(tag!("abcd")));
@@ -211,7 +211,7 @@
 //! recognize what we want. There is a way to avoid it, by inserting a space:
 //!
 //! ```rust
-//! # #[macro_use] extern crate nom;
+//! # #[macro_use] extern crate snack;
 //! # #[cfg(feature = "alloc")]
 //! # fn main() {
 //! named!(my_function<&[u8], Vec<&[u8]> >, many0!(tag!("abcd")));
@@ -227,13 +227,13 @@
 //! There are more high level patterns, like the **`alt!`** combinator, which provides a choice between multiple parsers. If one branch fails, it tries the next, and returns the result of the first parser that succeeds:
 //!
 //! ```rust
-//! # #[macro_use] extern crate nom;
+//! # #[macro_use] extern crate snack;
 //! # fn main() {
 //! named!(alt_tags, alt!(tag!("abcd") | tag!("efgh")));
 //!
 //! assert_eq!(alt_tags(b"abcdxxx"), Ok((&b"xxx"[..], &b"abcd"[..])));
 //! assert_eq!(alt_tags(b"efghxxx"), Ok((&b"xxx"[..], &b"efgh"[..])));
-//! assert_eq!(alt_tags(b"ijklxxx"), Err(nom::Err::Error(error_position!(&b"ijklxxx"[..], nom::ErrorKind::Alt))));
+//! assert_eq!(alt_tags(b"ijklxxx"), Err(snack::Err::Error(error_position!(&b"ijklxxx"[..], snack::ErrorKind::Alt))));
 //! # }
 //! ```
 //!
@@ -242,7 +242,7 @@
 //! The **`opt!`** combinator makes a parser optional. If the child parser returns an error, **`opt!`** will succeed and return None:
 //!
 //! ```rust
-//! # #[macro_use] extern crate nom;
+//! # #[macro_use] extern crate snack;
 //! # fn main() {
 //! named!( abcd_opt< &[u8], Option<&[u8]> >, opt!( tag!("abcd") ) );
 //!
@@ -254,7 +254,7 @@
 //! **`many0!`** applies a parser 0 or more times, and returns a vector of the aggregated results:
 //!
 //! ```rust
-//! # #[macro_use] extern crate nom;
+//! # #[macro_use] extern crate snack;
 //! # #[cfg(feature = "alloc")]
 //! # fn main() {
 //! use std::str;
@@ -282,9 +282,9 @@
 //! Example with `tuple!`:
 //!
 //! ```rust
-//! # #[macro_use] extern crate nom;
+//! # #[macro_use] extern crate snack;
 //! # fn main() {
-//! use nom::{ErrorKind, Needed,be_u16};
+//! use snack::{ErrorKind, Needed,be_u16};
 //!
 //! named!(tpl<&[u8], (u16, &[u8], &[u8]) >,
 //!   tuple!(
@@ -301,18 +301,18 @@
 //!     (0x6162u16, &b"cde"[..], &b"fg"[..])
 //!   ))
 //! );
-//! assert_eq!(tpl(&b"abcde"[..]), Err(nom::Err::Incomplete(Needed::Size(2))));
+//! assert_eq!(tpl(&b"abcde"[..]), Err(snack::Err::Incomplete(Needed::Size(2))));
 //! let input = &b"abcdejk"[..];
-//! assert_eq!(tpl(input), Err(nom::Err::Error(error_position!(&input[5..], ErrorKind::Tag))));
+//! assert_eq!(tpl(input), Err(snack::Err::Error(error_position!(&input[5..], ErrorKind::Tag))));
 //! # }
 //! ```
 //!
 //! Example with `do_parse!`:
 //!
 //! ```rust
-//! # #[macro_use] extern crate nom;
+//! # #[macro_use] extern crate snack;
 //! # fn main() {
-//! use nom::IResult;
+//! use snack::IResult;
 //!
 //! #[derive(Debug, PartialEq)]
 //! struct A {

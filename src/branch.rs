@@ -18,7 +18,7 @@
 /// # Basic example
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  // Create a parser that will match either "dragon" or "beast"
 ///  named!( dragon_or_beast, alt!( tag!( "dragon" ) | tag!( "beast" ) ) );
@@ -43,7 +43,7 @@
 /// manipulate the result from each parser:
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 /// #
 /// // We create an enum to represent our creatures
@@ -57,7 +57,7 @@
 /// // Let's make a helper function that returns true when not a space
 /// // we are required to do this because the `take_while!` macro is limited
 /// // to idents, so we can't negate `ìs_space` at the call site
-/// fn is_not_space(c: u8) -> bool { ! nom::is_space(c) }
+/// fn is_not_space(c: u8) -> bool { ! snack::is_space(c) }
 ///
 /// // Our parser will return the `Dragon` variant when matching "dragon",
 /// // the `Beast` variant when matching "beast" and otherwise it will consume
@@ -364,9 +364,9 @@ macro_rules! alt_complete (
 /// and returns the result of the second parser
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::Err;
-/// # use nom::ErrorKind;
+/// # #[macro_use] extern crate snack;
+/// # use snack::Err;
+/// # use snack::ErrorKind;
 /// # fn main() {
 ///  named!(sw,
 ///    switch!(take!(4),
@@ -391,7 +391,7 @@ macro_rules! alt_complete (
 /// You can specify a default case like with a normal match, using `_`
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!(sw,
 ///    switch!(take!(4),
@@ -496,8 +496,8 @@ macro_rules! switch (
 /// the tuple of results is in the same order as the parsers are declared
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::{Err,ErrorKind,Needed};
+/// # #[macro_use] extern crate snack;
+/// # use snack::{Err,ErrorKind,Needed};
 /// # fn main() {
 /// named!(perm<(&[u8], &[u8], &[u8])>,
 ///   permutation!(tag!("abcd"), tag!("efg"), tag!("hi"))
@@ -527,8 +527,8 @@ macro_rules! switch (
 /// optional:
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::{Err,ErrorKind,Needed};
+/// # #[macro_use] extern crate snack;
+/// # use snack::{Err,ErrorKind,Needed};
 /// # fn main() {
 /// named!(perm<&str, (Option<&str>, &str, &str)>,
 ///   permutation!(tag!("abcd")?, tag!("efg"), tag!("hi"))

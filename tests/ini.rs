@@ -1,8 +1,8 @@
 #[macro_use]
-extern crate nom;
+extern crate snack;
 
-use nom::{alphanumeric, multispace, space};
-use nom::types::CompleteByteSlice;
+use snack::{alphanumeric, multispace, space};
+use snack::types::CompleteByteSlice;
 
 use std::str;
 use std::collections::HashMap;

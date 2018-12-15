@@ -1,7 +1,7 @@
 #[macro_use]
-extern crate nom;
+extern crate snack;
 
-use nom::digit;
+use snack::digit;
 
 use std::str;
 use std::str::FromStr;

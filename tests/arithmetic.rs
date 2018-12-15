@@ -1,8 +1,8 @@
 #[macro_use]
-extern crate nom;
+extern crate snack;
 
-use nom::digit;
-use nom::types::CompleteStr;
+use snack::digit;
+use snack::types::CompleteStr;
 
 // Parser definition
 

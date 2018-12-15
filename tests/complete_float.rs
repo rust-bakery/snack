@@ -1,18 +1,18 @@
 #[macro_use]
-extern crate nom;
+extern crate snack;
 
-use nom::digit;
-use nom::types::CompleteStr;
+use snack::digit;
+use snack::types::CompleteStr;
 
 #[macro_export]
 macro_rules! complete_named (
   ($name:ident, $submac:ident!( $($args:tt)* )) => (
-    fn $name( i: CompleteStr ) -> nom::IResult<CompleteStr, CompleteStr, u32> {
+    fn $name( i: CompleteStr ) -> snack::IResult<CompleteStr, CompleteStr, u32> {
       $submac!(i, $($args)*)
     }
   );
   ($name:ident<$o:ty>, $submac:ident!( $($args:tt)* )) => (
-    fn $name( i: CompleteStr ) -> nom::IResult<CompleteStr, $o, u32> {
+    fn $name( i: CompleteStr ) -> snack::IResult<CompleteStr, $o, u32> {
       $submac!(i, $($args)*)
     }
   );

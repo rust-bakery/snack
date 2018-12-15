@@ -1,13 +1,13 @@
 #[macro_use]
-extern crate nom;
+extern crate snack;
 
 use std::fmt;
 use std::fmt::{Debug, Display, Formatter};
 
 use std::str::FromStr;
 
-use nom::{digit, multispace};
-use nom::types::CompleteStr;
+use snack::{digit, multispace};
+use snack::types::CompleteStr;
 
 pub enum Expr {
   Value(i64),

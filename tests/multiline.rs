@@ -1,9 +1,9 @@
 #[macro_use]
-extern crate nom;
+extern crate snack;
 
-use nom::types::CompleteStr;
-use nom::{alphanumeric, eol};
-use nom::IResult;
+use snack::types::CompleteStr;
+use snack::{alphanumeric, eol};
+use snack::IResult;
 
 pub fn end_of_line(input: CompleteStr) -> IResult<CompleteStr, CompleteStr> {
   alt!(input, eof!() | eol)

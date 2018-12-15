@@ -19,7 +19,7 @@
 /// `bits!( parser ) => ( &[u8], (&[u8], usize) -> IResult<(&[u8], usize), T> ) -> IResult<&[u8], T>`
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!( take_4_bits<u8>, bits!( take_bits!( u8, 4 ) ) );
 ///
@@ -128,8 +128,8 @@ macro_rules! bits_impl (
 /// at the next full byte.
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
-/// # use nom::rest;
+/// # #[macro_use] extern crate snack;
+/// # use snack::rest;
 /// # fn main() {
 ///  named!( parse<(u8, u8, &[u8])>,  bits!( tuple!(
 ///    take_bits!(u8, 4),
@@ -258,7 +258,7 @@ macro_rules! bytes_impl (
 /// `take_bits!(type, count) => ( (&[T], usize), U, usize) -> IResult<(&[T], usize), U>`
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!( take_pair<(u8, u8)>, bits!( pair!( take_bits!(u8, 4), take_bits!(u8, 4) ) ) );
 ///
@@ -330,7 +330,7 @@ macro_rules! take_bits (
 /// result on success.
 ///
 /// ```
-/// # #[macro_use] extern crate nom;
+/// # #[macro_use] extern crate snack;
 /// # fn main() {
 ///  named!( take_a<u8>, bits!( tag_bits!(u8, 4, 0xA) ) );
 ///
